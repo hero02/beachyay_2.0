@@ -1,0 +1,228 @@
+
+/***********************************
+background
+***********************************/
+body, html{
+	/*background-color: #e77d25 !important;*/
+	background: linear-gradient(270deg, #e77d25, #dd6a0b, #ddbd0b, #f2ce0c);
+background-size: 800% 800%;
+-webkit-animation: AnimationName 30s ease infinite;
+-o-animation: AnimationName 30s ease infinite;
+animation: AnimationName 30s ease infinite;
+font-family: 'Quicksand', sans-serif;
+font-weight: 500;}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+}
+/*******************************
+input fields styles
+********************************/
+
+
+input ,input:focus{
+	outline:none;
+	color:#fff;
+	border-bottom:1px solid rgba(255,255,255,.50)!important;
+}
+
+
+/*remove input shadow*/
+.form-control, .easy-autocomplete input{
+	box-shadow: none !important;
+	border:none;
+	border-bottom:1px solid #fff;
+	box-sizing: border-box;
+	background:none;
+	border-radius: 0;
+	color:#fff;
+}
+
+input[type="text"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,.50);
+}
+input[type="text"]::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,.50);
+}
+input[type="text"]:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,.50);
+}
+input[type="text"]:-moz-placeholder { /* Firefox 18- */
+  color:rgba(255,255,255,.50);
+}
+.input-group{
+	width:100%;
+	margin-top: 25px;
+}
+
+/*******************************
+status and error container
+********************************/
+.center{
+	text-align: center;
+	margin:25px 0;
+}
+
+.status_container{
+	text-align: center;
+}
+
+.status{
+	color:#fff;
+}
+
+.error_container{
+	background-color:#fff;
+	width:500px;
+	min-height:50px;
+	margin:25px auto 0 auto;
+}
+
+.answer_container{
+	background-color:rgba(255,255,255,.20);
+	width:500px;
+	min-height:50px;
+	margin:25px auto 0 auto;
+}
+}
+.block{
+   max-height:100%;
+   margin-top:25px;
+   text-align: center;
+   
+}
+.error,.temp,.condition,.answer, #blank{
+ text-align: center;
+ display: block;
+}
+
+.error_text,.answer_text{
+	line-height: 50px;
+
+}
+
+.answer_text{
+	color:#fff;
+	font-size: 1.5em;
+}
+
+.temp{
+	font-weight: 700;
+}
+
+.status_text{
+	font-size: 0.9em;
+}
+
+
+/**********************************
+ Weather info
+**********************************/
+
+#condition{
+	text-shadow: 1px 1px 2px rgba(17, 17, 17,.50);
+	text-transform: uppercase;
+}
+
+#degree{
+	text-shadow: 1px 1px 2px rgba(17, 17, 17,.50);
+	text-transform: uppercase;
+}
+
+#temp,#blank{
+	font-size: 16em;
+	text-shadow: 1px 1px 2px rgba(17, 17, 17,.50);
+}
+
+#degree{
+	font-size: 4em;
+	top:60px;
+	position:absolute;
+	text-shadow: 1px 1px 2px rgba(17, 17, 17,.50);
+}
+
+/**********************************
+ Weather Icons
+**********************************/
+
+#condition_img{
+	display: block;
+}
+
+img{
+	width:100%;
+}
+
+/*******************************
+btn style
+********************************/
+button{
+
+}
+
+.btn-default{
+	border-color: #fff;
+	padding: 15px;
+    width: 300px;
+}
+/**********************************
+ auto complete style
+**********************************/
+
+.easy-autocomplete-container ul{
+	margin-top:35px;
+}
+.easy-autocomplete-container{
+	z-index:5;
+}
+.easy-autocomplete{
+	width:100% !important;
+}
+/**********************************
+ Media Query
+**********************************/
+
+
+@media (max-width: 768px){
+	.error_container{
+	width: 100%;	
+}
+
+}
+
+@media (max-width: 375px){
+	.error_container,.answer_container{
+	width: 100% !important;}
+
+	#temp,#blank{
+	font-size: 7em;
+	text-shadow: 1px 1px 2px rgba(17, 17, 17,.50);
+}
+
+#degree{
+	font-size: 2em;
+	top:30px;
+	right:10px;
+	position:absolute;
+}
+.status_box {
+    padding: 0;
+}
+.easy-autocomplete{
+	width:100%;
+}
+	
+}

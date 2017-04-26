@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beach Yaya</title>
+<link rel="stylesheet" href="assets/css/easy-autocomplete.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+
+<!-- Latest compiled and minified JavaScript -->
+
+
+</head>
+<body>
+	<div class="container">
+		
+			<div class="col-md-6">
+				<div class="input-group">
+				  
+				  <input type="text" class="form-control" id="city" placeholder="City" aria-describedby="sizing-addon2">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-group">
+				  
+				  <input type="text" class="form-control" id="state" placeholder="State" aria-describedby="sizing-addon2" onfocus="if(this.value == 'state') { this.value = ''; }" value="State">
+				</div>
+			</div>
+		
+
+	<div class="container">
+		<div class="col-md-12 status_box">
+			<div class="error_container">
+				<span class="error">
+					<span class="error_text"></span>
+					<span class="status_text"></span>
+					</span>
+			</div>
+		</div>	
+	</div>	<!--error-->	
+
+	<div class="container status">
+		<div class="col-xs-6 block">
+			<div class="status_container">
+				<span id="temp">0</span>
+				<span id="degree">°</span>
+			</div>	
+		</div>
+		<div class="col-xs-6 block">
+			<div class="status_container">
+				<span id="condition_img"></span>
+				<span id="condition">
+					<span id="blank">?</span>
+				</span>
+			</div>	
+		</div>
+	</div><!--Status-->	
+
+	<div class="container">
+		<div class="col-md-12 answer_box">
+			<div class="answer_container">
+				<span class="answer">
+					<span class="answer_text" id="answer_text"></span>
+				</span>
+			</div>
+		</div>	
+	</div>	<!--beach yah or nay-->
+		
+			<div class="center">	
+				<button class="btn btn-default" type="submit">Submit</button>	
+			</div><!--center-->	
+	</div>
+	
+	
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="assets/js/jquery.easy-autocomplete.min.js"></script>
+  <script src="assets/js/city-state-data.js"></script>
+  <script type="text/javascript">
+  	$(document).ready (function (){
+			
+$("button").on("click", function(){
+        var cityre = /([a-zA-Z])/;
+        var city =$("#city").val();
+        var state =$("#state").val();  
+        
+    if(!city){
+		$(".error_text").empty();//clears text
+		$(".status_text").empty();
+	    $(".error_text").text("please enter a city ");
+	   
+    }else if(!city.match(cityre)){
+		$(".status_text").empty();
+		$(".error_text").empty();
+		$(".error_text").text("Never heard of that, sorry.");
+    }else if(info.query.results.channel == null || info.query.results.channel == " "){
+		$(".status_text").empty();
+		$(".error_text").empty();
+		$(".error_text").text("Sorry try again.");
+    }else{
+    	$(".error_text").empty();
+
+
+$.ajax({ url:"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%2C%20"+state+"%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys",
+        dataType:"jsonp",
+        success:function(info){
+          
+          
+          var temp = info.query.results.channel.item.condition.temp;
+          var condstat = info.query.results.channel.item.condition.text;
+          var thecity = info.query.results.channel.location.city;
+          var thestate = info.query.results.channel.location.region;
+          var place = info.query.results.channel.title;
+          
+          $('#state').val(thestate);
+
+
+          $(".status_text").text("Should you go to the beach in "+ thecity+", "+thestate+" ?");
+          $("#condition").text(condstat);
+          $("#temp").text(temp);
+          $("#place").text("where "+place);
+
+//weather icons conditions
+
+		//best range for weather	
+		if (75<=temp<= 85 && condstat == 'Sunny'){
+			
+			$("#condition_img").html("<image src=\"assets/images/weather-icons_17.png\">");
+			
+			//loop through answers
+			var myArray = ['Looks Good', 'Go Ahead! Dive In!', 'Let\'s  Get Wet!'];
+
+			var rand = Math.floor(Math.random() * myArray.length);
+
+			document.getElementById('answer_text').innerHTML = myArray[rand];
+
+		}else{
+			//loop through answers
+			var myArray = ['Watch a movie.', 'Not the best time.', 'Netflix and Chill'];
+
+			var rand = Math.floor(Math.random() * myArray.length);
+
+			document.getElementById('answer_text').innerHTML = myArray[rand];
+		}
+
+		//end conditions
+
+
+		//whats thebest way to cycle through images??????
+
+            }
+        
+          })
+        }
+    });
+  
+  });
+  </script>
+</body>
+</html>
